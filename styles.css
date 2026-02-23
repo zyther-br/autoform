@@ -1,0 +1,114 @@
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(10px);
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes backdropFadeIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(8px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes particle-explode {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.smart-highlight {
+  outline: 2px solid #3b82f6 !important;
+  background-color: rgba(59,130,246,0.05) !important;
+  cursor: crosshair !important;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.smart-floating {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 12px;
+  z-index: 999999;
+  font-size: 14px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  border: 1px solid rgba(59,130,246,0.3);
+  animation: fadeIn 0.3s ease;
+}
+
+.smart-field-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  box-shadow: 0 2px 10px rgba(59,130,246,0.5);
+  z-index: 999999;
+  animation: fadeIn 0.5s ease;
+  pointer-events: none;
+}
+
+.smart-field-icon {
+  animation: fadeIn 0.5s ease, pulse 2s ease-in-out infinite;
+}
+
+input[data-smart-marked="true"],
+textarea[data-smart-marked="true"] {
+  transition: all 0.2s ease !important;
+}
+
+input[data-smart-marked="true"]:focus,
+textarea[data-smart-marked="true"]:focus {
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.2) !important;
+}

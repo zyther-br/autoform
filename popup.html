@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css">
+<style>
+:root{
+  --bg-primary:#18181b;
+  --bg-secondary:#27272a;
+  --bg-card:#27272a;
+  --bg-input:#3f3f46;
+  --text-primary:#fafafa;
+  --text-secondary:#a1a1aa;
+  --accent:#3b82f6;
+  --accent-hover:#2563eb;
+  --border:#3f3f46;
+  --shadow:rgba(0,0,0,0.3);
+}
+
+html{
+  overflow:hidden;
+  border-radius:12px;
+}
+
+/* Scrollbar fina e estilizada */
+::-webkit-scrollbar{
+  width:4px;
+}
+::-webkit-scrollbar-track{
+  background:transparent;
+}
+::-webkit-scrollbar-thumb{
+  background:var(--border);
+  border-radius:99px;
+}
+::-webkit-scrollbar-thumb:hover{
+  background:var(--accent);
+}
+
+[data-theme="light"]{
+  --bg-primary:#fafafa;
+  --bg-secondary:#f4f4f5;
+  --bg-card:#ffffff;
+  --bg-input:#f4f4f5;
+  --text-primary:#18181b;
+  --text-secondary:#71717a;
+  --accent:#3b82f6;
+  --accent-hover:#2563eb;
+  --border:#e4e4e7;
+  --shadow:rgba(0,0,0,0.08);
+}
+
+@keyframes slideIn{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+@keyframes fadeIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+@keyframes pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.05)}
+}
+
+@keyframes shimmer{
+  0%{background-position:200% center}
+  100%{background-position:-200% center}
+}
+
+@keyframes scaleIn{
+  from{
+    opacity:0;
+    transform:scale(0.95) translateY(-10px);
+  }
+  to{
+    opacity:1;
+    transform:scale(1) translateY(0);
+  }
+}
+
+@keyframes backdropFadeIn{
+  from{
+    opacity:0;
+    backdrop-filter:blur(0px);
+  }
+  to{
+    opacity:1;
+    backdrop-filter:blur(5px);
+  }
+}
+
+body{
+  font-family:'Outfit',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  width:380px;
+  padding:0;
+  margin:0;
+  background:var(--bg-primary);
+  color:var(--text-primary);
+  animation:fadeIn 0.3s ease;
+  transition:all 0.3s ease;
+  display:flex;
+  flex-direction:column;
+  border-radius:12px;
+  overflow:hidden;
+}
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 20px;
+  background:var(--bg-secondary);
+  border-bottom:1px solid var(--border);
+}
+
+.header-actions{
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+
+h2{
+  margin:0;
+  font-size:20px;
+  font-weight:700;
+  letter-spacing:-0.03em;
+  color:var(--text-primary);
+}
+
+.icon-btn{
+  cursor:pointer;
+  font-size:20px;
+  opacity:0.7;
+  transition:all 0.2s ease;
+  background:transparent;
+  width:32px;
+  height:32px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:8px;
+}
+
+.icon-btn i{
+  font-size:20px;
+}
+
+.icon-btn:hover{
+  opacity:1;
+  background:var(--bg-input);
+}
+
+.section{
+  margin-top:12px;
+  padding:0 20px;
+  animation:slideIn 0.3s ease;
+}
+
+button{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:600;
+  font-size:14px;
+  transition:all 0.3s ease;
+  box-shadow:0 4px 10px rgba(0,0,0,0.2);
+  position:relative;
+  overflow:hidden;
+}
+
+button::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);
+  transition:left 0.5s;
+}
+
+button:hover::before{
+  left:100%;
+}
+
+button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 20px rgba(0,0,0,0.3);
+}
+
+button:active{
+  transform:translateY(0);
+  box-shadow:0 2px 5px rgba(0,0,0,0.2);
+}
+
+.primary{
+  background:linear-gradient(135deg,#3b82f6 0%,#2563eb 100%);
+  color:white;
+}
+
+.primary:hover{
+  background:linear-gradient(135deg,#2563eb 0%,#1d4ed8 100%);
+}
+
+.secondary{
+  background:linear-gradient(135deg,#475569 0%,#334155 100%);
+  color:white;
+}
+
+.secondary:hover{
+  background:linear-gradient(135deg,#334155 0%,#1e293b 100%);
+}
+
+.danger{
+  background:linear-gradient(135deg,#ef4444 0%,#dc2626 100%);
+  color:white;
+}
+
+.danger:hover{
+  background:linear-gradient(135deg,#dc2626 0%,#b91c1c 100%);
+}
+
+.field-card{
+  background:var(--bg-card);
+  padding:12px;
+  margin-top:8px;
+  border-radius:12px;
+  font-size:13px;
+  border:1px solid var(--border);
+  transition:all 0.2s ease;
+  animation:slideIn 0.3s ease;
+}
+
+.field-card:hover{
+  border-color:var(--accent);
+  box-shadow:0 0 0 1px var(--accent);
+}
+
+.field-card > div:first-child{
+  font-weight:500;
+  color:var(--text-primary);
+  margin-bottom:8px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:13px;
+}
+
+.field-card > div:first-child::before{
+  content:'\F0765';
+  font-family:'Material Design Icons';
+  color:var(--accent);
+  font-size:16px;
+}
+
+input[type="text"]{
+  width:calc(100% - 24px);
+  padding:10px 12px;
+  margin-top:6px;
+  border-radius:8px;
+  border:1px solid var(--border);
+  background:var(--bg-input);
+  color:var(--text-primary);
+  font-size:13px;
+  transition:all 0.2s ease;
+}
+
+input[type="text"]:focus{
+  outline:none;
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(139,92,246,0.1);
+}
+
+input[type="checkbox"]{
+  width:16px;
+  height:16px;
+  cursor:pointer;
+  accent-color:var(--accent);
+}
+
+label{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  cursor:pointer;
+  padding:8px;
+  border-radius:8px;
+  transition:background 0.2s;
+  font-size:14px;
+}
+
+label:hover{
+  background:var(--bg-input);
+}
+
+.row{
+  display:flex;
+  gap:8px;
+  margin-top:8px;
+}
+
+.small-btn{
+  flex:1;
+  padding:8px;
+  font-size:12px;
+  margin-top:0;
+}
+
+.hidden{
+  display:none !important;
+}
+
+.section > strong{
+  display:block;
+  margin-bottom:8px;
+  color:var(--text-secondary);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:0.8px;
+  font-weight:600;
+}
+
+#mainTab{
+  display:flex;
+  flex-direction:column;
+  min-height:420px;
+  padding-bottom:12px;
+}
+
+#mainTab .section:last-child{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  min-height:0;
+}
+
+#settingsTab{
+  animation:slideIn 0.25s ease;
+  padding-bottom:16px;
+}
+
+#fieldsContainer{
+  max-height:320px;
+  overflow-y:auto;
+}
+
+#fieldsContainer:empty::after{
+  content:'Nenhum campo configurado';
+  display:block;
+  opacity:0.5;
+  font-size:13px;
+  text-align:center;
+  padding:24px;
+  color:var(--text-secondary);
+}
+
+.modal-header i{
+  font-size:20px;
+}
+
+button i{
+  font-size:16px;
+  margin-right:4px;
+}
+
+/* MODAL */
+.modal-overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background:rgba(0,0,0,0.75);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:10000;
+  animation:backdropFadeIn 0.25s ease;
+  backdrop-filter:blur(5px);
+}
+
+.modal{
+  background:var(--bg-card);
+  border-radius:16px;
+  padding:20px;
+  min-width:280px;
+  max-width:90%;
+  box-shadow:0 25px 50px rgba(0,0,0,0.5);
+  animation:scaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border:1px solid var(--border);
+}
+
+.modal-header{
+  font-size:16px;
+  font-weight:600;
+  margin-bottom:8px;
+  color:var(--text-primary);
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.modal-body{
+  margin:12px 0;
+  color:var(--text-secondary);
+  line-height:1.5;
+  font-size:14px;
+}
+
+.modal-input{
+  width:calc(100% - 24px);
+  padding:10px 12px;
+  border-radius:8px;
+  border:1px solid var(--border);
+  background:var(--bg-input);
+  color:var(--text-primary);
+  font-size:14px;
+  margin-top:8px;
+  transition:all 0.2s ease;
+}
+
+.modal-input:focus{
+  outline:none;
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(139,92,246,0.1);
+}
+
+.modal-actions{
+  display:flex;
+  gap:8px;
+  margin-top:16px;
+}
+
+.modal-btn{
+  flex:1;
+  padding:10px;
+  border-radius:8px;
+  border:none;
+  cursor:pointer;
+  font-weight:500;
+  font-size:14px;
+  transition:all 0.2s ease;
+}
+
+.modal-btn.primary{
+  background:var(--accent);
+  color:white;
+}
+
+.modal-btn.secondary{
+  background:var(--bg-input);
+  color:var(--text-primary);
+}
+
+.modal-btn:hover{
+  transform:translateY(-1px);
+  box-shadow:0 4px 8px var(--shadow);
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h2>AutoForm</h2>
+  <div class="header-actions">
+    <div id="themeToggle" class="icon-btn" title="Alternar tema"><i class="mdi mdi-theme-light-dark"></i></div>
+    <div id="settingsIcon" class="icon-btn" title="Configurações"><i class="mdi mdi-cog"></i></div>
+  </div>
+</div>
+
+<!-- MODAL CONTAINER -->
+<div id="modalContainer"></div>
+
+<!-- ABA PRINCIPAL -->
+<div id="mainTab">
+
+  <div class="section" style="display:flex;gap:10px;">
+    <button id="capture" class="primary">Configurar Campo</button>
+    <button id="fill" class="secondary">Preencher Agora</button>
+  </div>
+
+  <div class="section">
+    <strong>Campos desta página:</strong>
+    <div id="fieldsContainer"></div>
+  </div>
+
+</div>
+
+<!-- ABA CONFIG -->
+<div id="settingsTab" class="hidden">
+
+  <div class="section">
+    <label>
+      <input type="checkbox" id="autoToggle">
+      Auto preencher ao carregar página
+    </label>
+  </div>
+
+  <div class="section">
+    <button id="clearPage" class="danger">Limpar dados desta página</button>
+    <button id="clearAll" class="danger">Limpar TODOS os dados</button>
+  </div>
+
+  <div class="section">
+    <button id="backBtn" class="secondary">Voltar</button>
+  </div>
+
+</div>
+
+<script src="popup.js"></script>
+</body>
+</html>
