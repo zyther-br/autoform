@@ -2,10 +2,10 @@
   "manifest_version": 3,
   "name": "AutoForm - Smart Form Filler",
   "short_name": "AutoForm",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Preencha formularios automaticamente com seus dados salvos. Suporta Google Forms, Microsoft Forms e formularios genericos.",
   "author": "AutoForm",
-  "permissions": ["storage", "activeTab", "scripting"],
+  "permissions": ["storage", "activeTab"],
   "host_permissions": ["<all_urls>"],
   "web_accessible_resources": [
     {
